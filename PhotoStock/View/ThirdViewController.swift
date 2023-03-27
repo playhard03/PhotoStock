@@ -11,7 +11,6 @@ class ThirdViewController: UIViewController {
     
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var imageView: UIImageView!
-    var images = [UIImage]()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -21,15 +20,21 @@ class ThirdViewController: UIViewController {
     }
     
     @IBAction func addButton(_ sender: Any) {
-        let models = Models(name: textField.text!)
-        UserDefaults.standard.setValue(encodable: models, forKey: "name")
+        guard let image = imageView.image else {return}
+        guard let text = textField.text else {return}
+        guard let saveImage = saveImage(image: image) else {return}
         
-        if let image = imageView.image {
-            let imageName = saveImage(image: image)
-            UserDefaults.standard.setValue(imageName, forKey: "image")
+        let models = Models(image: saveImage, comment: text)
+        
+        if let array = UserDefaults.standard.value([Models].self, forKey: Keys.photo.rawValue){
+            var tempArray = array
+            tempArray.append(models)
+            UserDefaults.standard.setValue(encodable: tempArray, forKey: Keys.photo.rawValue)
+        } else {
+            let array : [Models] = [models]
+            UserDefaults.standard.setValue(encodable: array, forKey: Keys.photo.rawValue)
         }
-        textField.text = nil
-        navigationController?.popViewController(animated: true)
+                
     }
     
     @IBAction func backButton(_ sender: Any) {
