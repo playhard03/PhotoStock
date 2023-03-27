@@ -11,20 +11,35 @@ class LibraryViewController: UIViewController {
     
     //MARK: - IBoutlets
     @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomTextField: UITextField!
     
+    //MARK: - let/var
     var modelsArray : [Models]?
     var current = 0
     var capacity = 1
+    
     //MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadDefault() 
+        loadDefault()
+        registerForKeyboardNotifications()
     }
     
     //MARK: - IBAction
     @IBAction func leftButton(_ sender: Any) {
+        updateData()
         
+        current = current < capacity - 1 ? current + 1 : 0
+        guard capacity > 1 else {return}
+        guard let models = modelsArray else {return}
+        
+        let mod = models[current]
+        guard let image = loadImage(fileName: mod.image) else {return}
+        textField.text = mod.comment
+        imageView.image = image
     }
     
     @IBAction func rightButton(_ sender: Any) {
@@ -44,6 +59,8 @@ class LibraryViewController: UIViewController {
     @IBAction func backButton(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
+    
+    //MARK: - func flow
     
     private func loadImage(fileName: String) -> UIImage? {
         if let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first{
@@ -75,8 +92,8 @@ class LibraryViewController: UIViewController {
         } else {
             capacity = 0
         }
-        
     }
+    
     
     
 }

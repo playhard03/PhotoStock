@@ -20,6 +20,7 @@
 		73A3F60A29C8B66000B47150 /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A3F60929C8B66000B47150 /* LibraryViewController.swift */; };
 		73A3F60C29C8BA3A00B47150 /* UserDefaults +extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A3F60B29C8BA3A00B47150 /* UserDefaults +extension.swift */; };
 		73A3F60F29C8BBC600B47150 /* ThirdViewController +extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A3F60E29C8BBC600B47150 /* ThirdViewController +extension.swift */; };
+		73E18BB129D1DC3B00EC17B4 /* LibraryViewController +extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E18BB029D1DC3B00EC17B4 /* LibraryViewController +extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		73A3F60929C8B66000B47150 /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		73A3F60B29C8BA3A00B47150 /* UserDefaults +extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults +extension.swift"; sourceTree = "<group>"; };
 		73A3F60E29C8BBC600B47150 /* ThirdViewController +extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ThirdViewController +extension.swift"; sourceTree = "<group>"; };
+		73E18BB029D1DC3B00EC17B4 /* LibraryViewController +extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LibraryViewController +extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 		73A3F5E929C8ABEA00B47150 /* PhotoStock */ = {
 			isa = PBXGroup;
 			children = (
+				73E18BAF29D1DC1100EC17B4 /* Extension */,
 				73A3F60029C8AF4400B47150 /* View */,
 				73A3F5FF29C8AF2F00B47150 /* Models */,
 				73A3F5FE29C8AF2400B47150 /* Supporting */,
@@ -94,9 +97,6 @@
 			isa = PBXGroup;
 			children = (
 				73A3F60129C8B36500B47150 /* Models.swift */,
-				73A3F60529C8B51800B47150 /* ViewController +extension.swift */,
-				73A3F60B29C8BA3A00B47150 /* UserDefaults +extension.swift */,
-				73A3F60E29C8BBC600B47150 /* ThirdViewController +extension.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -110,6 +110,17 @@
 				73A3F60929C8B66000B47150 /* LibraryViewController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		73E18BAF29D1DC1100EC17B4 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				73A3F60E29C8BBC600B47150 /* ThirdViewController +extension.swift */,
+				73A3F60B29C8BA3A00B47150 /* UserDefaults +extension.swift */,
+				73A3F60529C8B51800B47150 /* ViewController +extension.swift */,
+				73E18BB029D1DC3B00EC17B4 /* LibraryViewController +extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,6 +197,7 @@
 				73A3F5EF29C8ABEA00B47150 /* ViewController.swift in Sources */,
 				73A3F5EB29C8ABEA00B47150 /* AppDelegate.swift in Sources */,
 				73A3F60A29C8B66000B47150 /* LibraryViewController.swift in Sources */,
+				73E18BB129D1DC3B00EC17B4 /* LibraryViewController +extension.swift in Sources */,
 				73A3F5ED29C8ABEA00B47150 /* SceneDelegate.swift in Sources */,
 				73A3F60C29C8BA3A00B47150 /* UserDefaults +extension.swift in Sources */,
 				73A3F60829C8B5BF00B47150 /* ThirdViewController.swift in Sources */,
