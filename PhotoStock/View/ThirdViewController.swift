@@ -37,7 +37,6 @@ class ThirdViewController: UIViewController {
             let array : [Models] = [models]
             UserDefaults.standard.setValue(encodable: array, forKey: Keys.photo.rawValue)
         }
-        delegate?.reload()
         textField.text = nil
         navigationController?.popViewController(animated: true)
     }
