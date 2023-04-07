@@ -22,6 +22,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         passwordTextField.isSecureTextEntry = true
+        nameTextField.text = "Name"
+        passwordTextField.text = "12345"
     }
     
     //MARK: - IBAction

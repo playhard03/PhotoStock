@@ -10,49 +10,35 @@ import UIKit
 class LibraryViewController: UIViewController {
     
     //MARK: - IBoutlets
-    @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomTextField: UITextField!
     
     //MARK: - let/var
-    var modelsArray : [Models]?
-    var current = 0
-    var capacity = 1
+    var index = 0
+    var selectedImage: UIImage?
+    private enum Direction{
+        case left, right
+        
+    }
     
     //MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadDefault()
+        imageView.image =  loadImage(fileName: Manager.shared.models[index].image)
+        bottomTextField.text = Manager.shared.models[index].comment
         registerForKeyboardNotifications()
+        imageView.image = selectedImage
     }
     
     //MARK: - IBAction
     @IBAction func leftButton(_ sender: Any) {
-        updateData()
-        
-        current = current < capacity - 1 ? current + 1 : 0
-        guard capacity > 1 else {return}
-        guard let models = modelsArray else {return}
-        
-        let mod = models[current]
-        guard let image = loadImage(fileName: mod.image) else {return}
-        textField.text = mod.comment
-        imageView.image = image
+        buttonPreessed(direection: .left)
     }
     
     @IBAction func rightButton(_ sender: Any) {
-        updateData()
-        
-        current = current < capacity - 1 ? current + 1 : 0
-        guard capacity > 1 else {return}
-        guard let models = modelsArray else {return}
-        
-        let mod = models[current]
-        guard let image = loadImage(fileName: mod.image) else {return}
-        textField.text = mod.comment
-        imageView.image = image
+        buttonPreessed(direection: .right)
 
     }
     
@@ -61,6 +47,18 @@ class LibraryViewController: UIViewController {
     }
     
     //MARK: - func flow
+    private func buttonPreessed(direection: Direction){
+        switch direection{
+        case .left:
+            index = index == 0 ? Manager.shared.models.count - 1 : index - 1
+        case .right:
+            index = index == Manager.shared.models.count - 1 ? 0 : index + 1
+        }
+        
+        let image = loadImage(fileName: Manager.shared.models[index].image) ?? UIImage()
+        imageView.image = image
+        bottomTextField.text = Manager.shared.models[index].comment
+    }
     
     private func loadImage(fileName: String) -> UIImage? {
         if let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first{
@@ -70,30 +68,4 @@ class LibraryViewController: UIViewController {
         }
         return nil
     }
-    
-    private func updateData() {
-        guard let models = modelsArray?[current] else {return}
-        guard let text = textField.text else {return}
-        models.comment = text
-        UserDefaults.standard.setValue(encodable: modelsArray, forKey: Keys.photo.rawValue)
-    }
-    
-    private func loadDefault() {
-        if let models = UserDefaults.standard.value([Models].self, forKey: Keys.photo.rawValue){
-            modelsArray = models
-            capacity = models.count
-            guard let model = models.first else {return}
-            
-            textField.text = model.comment
-            let imageName = model.image
-            guard let image = loadImage(fileName: imageName) else {return}
-            imageView.image = image
-                    
-        } else {
-            capacity = 0
-        }
-    }
-    
-    
-    
 }

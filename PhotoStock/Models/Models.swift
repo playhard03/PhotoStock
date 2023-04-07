@@ -17,18 +17,20 @@ enum Keys : String {
     case photo
 }
 
+
 class Models: Codable {
     var image : String
     var comment : String
-    var array = [String]()
+    var arrayImage : [UIImage]?
     
     init(image: String, comment: String){
         self.image = image
         self.comment = comment
+       
 }
     
 enum CodingKeys: String, CodingKey {
-    case image, isLiked, comment
+    case image, arrayImage, comment
 }
 
 required public init(from decoder: Decoder) throws {
@@ -36,6 +38,7 @@ required public init(from decoder: Decoder) throws {
     
     self.image = try container.decode(String.self, forKey: .image)
     self.comment = try container.decode(String.self, forKey: .comment)
+   
 }
 
 public func encode(to encoder: Encoder) throws {

@@ -23,6 +23,29 @@ extension ThirdViewController: UIImagePickerControllerDelegate, UINavigationCont
         picker.dismiss(animated: true)
     }
    
-    
+    func saveImage(image: UIImage) -> String?{
+        guard let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {return nil}
+        
+        let fileName = UUID().uuidString
+        let fileUrl = documentDirectory.appendingPathComponent(fileName)
+        guard let data  = image.jpegData(compressionQuality: 1) else {return nil}
+        
+        if FileManager.default.fileExists(atPath: fileUrl.path){
+            do {
+                try FileManager.default.removeItem(atPath: fileUrl.path)
+                print("Delete old picture")
+            } catch let error {
+                print("Error \(error)")
+            }
+        }
+        
+        do {
+            try data.write(to: fileUrl)
+            return fileName
+        }catch let error {
+            print("Error \(error)")
+            return nil
+        }
+    }
     
 }
